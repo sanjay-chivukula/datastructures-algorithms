@@ -33,8 +33,10 @@ public:
     int getValue(const std::string word) const;             // throws error if word/key doesn't exist.
 
 private:
-    TrieNode *rootNode{nullptr};
+    struct TrieNode *rootNode{nullptr};
 
+private:
+    void recursiveDelete_(TrieNode *node);
 };
 
 #endif //TRIE_CPP_TRIE_BASIC_H
