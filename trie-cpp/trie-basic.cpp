@@ -85,3 +85,14 @@ void Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string word, 
     }
     return;
 }
+
+bool Trie::hasKey(const std::string word) const {
+    TrieNode *currNode = rootNode;
+    for (auto character: word) {
+        int index = (int) (character - 'a');
+        if (currNode->children[index] == nullptr) {
+            return false;
+        }
+    }
+    return true;
+}
