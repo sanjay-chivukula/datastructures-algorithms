@@ -25,12 +25,12 @@ Trie::~Trie() {
  * @param word
  * @param value
  */
-void Trie::insertItem(const std::string word, int value) {
+void Trie::insertItem(const std::string& word, int value) {
     struct TrieNode *currNode = rootNode;
     for (auto character: word) {
         int index = (int) (character - 'a');
         currNode->children[index] = new struct TrieNode();
-        ++currNode->childrenCount;
+        ++(currNode->childrenCount);
         currNode = currNode->children[index];
     }
     currNode->value = value;
@@ -40,7 +40,7 @@ void Trie::insertItem(const std::string word, int value) {
  * Function to remove a word entry from the Trie Data structure if it exists.
  * @param word
  */
-void Trie::deleteItem(const std::string word) {
+void Trie::deleteItem(const std::string& word) {
     recursiveDeleteEntry_(rootNode, word, 0);
 }
 
@@ -49,7 +49,7 @@ void Trie::deleteItem(const std::string word) {
  * Helper function for destructor.
  * @param node
  */
-void recursiveDeleteNode_(struct TrieNode *node) {
+void Trie::recursiveDeleteNode_(struct TrieNode *node) {
     if (node == nullptr) {
         return;
     }
@@ -68,7 +68,7 @@ void recursiveDeleteNode_(struct TrieNode *node) {
  * @param word
  * @param depth
  */
-void Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string word, int depth) {
+void Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string& word, int depth) {
     // This child is not a match.
     if (node == nullptr) {
         return;
@@ -89,7 +89,6 @@ void Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string word, 
         delete node;
         node = nullptr;
     }
-    return;
 }
 
 /**
@@ -97,13 +96,14 @@ void Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string word, 
  * @param word
  * @return
  */
-bool Trie::hasKey(const std::string word) const {
+[[nodiscard]] bool Trie::hasKey(const std::string& word) const {
     TrieNode *currNode = rootNode;
     for (auto character: word) {
         int index = (int) (character - 'a');
         if (currNode->children[index] == nullptr) {
             return false;
         }
+        currNode = currNode->children[index];
     }
     return true;
 }
@@ -113,7 +113,7 @@ bool Trie::hasKey(const std::string word) const {
  * @param word
  * @return
  */
-int Trie::getValue(const std::string word) const {
+[[nodiscard]] int Trie::getValue(const std::string& word) const {
     TrieNode *currNode = rootNode;
     for (auto character: word) {
         int index = (int) (character - 'a');

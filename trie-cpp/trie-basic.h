@@ -29,18 +29,18 @@ public:
 
     ~Trie();
 
-    void insertItem(const std::string word, int value);
+    void insertItem(const std::string& word, int value);
 
-    void deleteItem(const std::string word);
+    void deleteItem(const std::string& word);
 
-    bool hasKey(const std::string word) const;
+    [[nodiscard]] bool hasKey(const std::string& word) const;
 
-    int getValue(const std::string word) const;             // throws error if word/key doesn't exist.
+    [[nodiscard]] int getValue(const std::string& word) const;             // throws error if word/key doesn't exist.
 
 private:
     void recursiveDeleteNode_(struct TrieNode *node);
 
-    void recursiveDeleteEntry_(struct TrieNode *node, const std::string word, int depth = 0);
+    void recursiveDeleteEntry_(struct TrieNode *node, const std::string& word, int depth = 0);
 
 private:
     struct TrieNode *rootNode{nullptr};

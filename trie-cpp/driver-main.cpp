@@ -2,3 +2,22 @@
 // Created by sanjay on 8/12/20.
 //
 
+#include <iostream>
+#include "trie-basic.h"
+
+int main() {
+    std::cout << "Trie Basic Implementation" << std::endl;
+
+    // writing simple tests to see if the implementation works.
+
+    // construction:
+    Trie testTrie;
+
+    testTrie.insertItem("testword", 23);
+    if (testTrie.hasKey("testword")) {
+        std::cout << "Insertion and Entry check works!" << std::endl;
+    } else {
+        std::cout << "Insertion or Entry check failed!" << std::endl;
+    }
+    return 0;
+};
