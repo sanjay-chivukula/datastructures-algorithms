@@ -30,6 +30,7 @@ void Trie::insertItem(const std::string word, int value) {
      for (auto character: word) {
          int index = (int) (character - 'a');
          currNode->children[index] = new struct TrieNode();
+         ++currNode->childrenCount;
          currNode = currNode->children[index];
      }
      currNode->value = value;
@@ -40,7 +41,7 @@ void Trie::insertItem(const std::string word, int value) {
  * @param word
  */
 void Trie::deleteItem(const std::string word) {
-    // TODO: write the implementation.
+    recursiveDeleteEntry_(rootNode, word, 0);
 }
 
 
@@ -61,6 +62,26 @@ void recursiveDeleteNode_(struct TrieNode* node) {
     node = nullptr;
 }
 
-void Trie::recursiveDeleteEntry_(struct TrieNode *node) {
-    // TODO: Write the implementation.
+void Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string word, int depth) {
+    // This child is not a match.
+    if (node == nullptr) {
+        return;
+    }
+
+    int index = (int) (word[depth] - 'a');
+    recursiveDeleteEntry_(node->children[index], word, depth + 1);
+
+    // This is the end of the word.
+    if ((depth + 1) == word.size()) {
+        if(node->isWord) {
+            node->isWord = false;
+            node->value = 0;
+        }
+    }
+
+    if (node->childrenCount == 0 && !node->isWord) {
+        delete node;
+        node = nullptr;
+    }
+    return;
 }
