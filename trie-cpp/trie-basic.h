@@ -40,7 +40,7 @@ public:
 private:
     void recursiveDeleteNode_(struct TrieNode *node);
 
-    void recursiveDeleteEntry_(struct TrieNode *node, const std::string& word, int depth = 0);
+    bool recursiveDeleteEntry_(struct TrieNode *node, const std::string& word, int depth = 0);
 
 private:
     struct TrieNode *rootNode{nullptr};

@@ -27,13 +27,14 @@ Trie::~Trie() {
  */
 void Trie::insertItem(const std::string& word, int value) {
     struct TrieNode *currNode = rootNode;
-    for (auto character: word) {
-        int index = (int) (character - 'a');
+    for (int i = 0; i < word.size(); ++i) {
+        int index = (int) (word[i] - 'a');
         currNode->children[index] = new struct TrieNode();
         ++(currNode->childrenCount);
         currNode = currNode->children[index];
     }
     currNode->value = value;
+    currNode->isWord = true;
 }
 
 /**
@@ -68,27 +69,27 @@ void Trie::recursiveDeleteNode_(struct TrieNode *node) {
  * @param word
  * @param depth
  */
-void Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string& word, int depth) {
-    // This child is not a match.
+bool Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string& word, int depth) {
     if (node == nullptr) {
-        return;
+        return false;
     }
 
     int index = (int) (word[depth] - 'a');
-    recursiveDeleteEntry_(node->children[index], word, depth + 1);
+    bool shouldDeleteChild = recursiveDeleteEntry_(node->children[index], word, depth+1);
+    if (shouldDeleteChild) {
+        delete node->children[index];
+        node->children[index] = nullptr;
+        node->childrenCount--;
+    }
 
-    // This is the end of the word.
-    if ((depth + 1) == word.size()) {
-        if (node->isWord) {
+    if ((depth+1) == word.size()) {
+        if(node->isWord) {
             node->isWord = false;
             node->value = 0;
         }
     }
 
-    if (node->childrenCount == 0 && !node->isWord) {
-        delete node;
-        node = nullptr;
-    }
+    return node->childrenCount == 0;
 }
 
 /**
@@ -98,8 +99,8 @@ void Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string& word,
  */
 [[nodiscard]] bool Trie::hasKey(const std::string& word) const {
     TrieNode *currNode = rootNode;
-    for (auto character: word) {
-        int index = (int) (character - 'a');
+    for (int i = 0; i < word.size(); ++i) {
+        int index = (int) (word[i] - 'a');
         if (currNode->children[index] == nullptr) {
             return false;
         }

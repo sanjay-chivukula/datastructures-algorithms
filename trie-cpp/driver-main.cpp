@@ -19,5 +19,12 @@ int main() {
     } else {
         std::cout << "Insertion or Entry check failed!" << std::endl;
     }
+
+    testTrie.deleteItem("testword");
+    if (testTrie.hasKey("testword")) {
+        std::cout << "Delete Item failed!" << std::endl;
+    } else {
+        std::cout << "Delete Item works!" << std::endl;
+    }
     return 0;
 };
