@@ -7,12 +7,17 @@
 
 #include <iostream>
 
-
+// Assumption: All characters are lower case english alphabets.
 static const int CHARACTER_COUNT = 26;
 
 
 struct TrieNode {
-    int value;
+    // Actual data for the Trie node.
+    int value{0};
+
+    // For managing the Trie.
+    bool isWord{false};
+    int childrenCount{0};
     TrieNode *children[CHARACTER_COUNT]{nullptr};
 };
 
@@ -26,17 +31,19 @@ public:
 
     void insertItem(const std::string word, int value);
 
-    bool deleteItem(const std::string word);                // returns true even if item doesn't exist.
+    void deleteItem(const std::string word);
 
     bool hasKey(const std::string word) const;
 
     int getValue(const std::string word) const;             // throws error if word/key doesn't exist.
 
 private:
-    struct TrieNode *rootNode{nullptr};
+    void recursiveDeleteNode_(struct TrieNode *node);
+
+    void recursiveDeleteEntry_(struct TrieNode *node);
 
 private:
-    void recursiveDelete_(TrieNode *node);
+    struct TrieNode *rootNode{nullptr};
 };
 
 #endif //TRIE_CPP_TRIE_BASIC_H
