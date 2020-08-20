@@ -26,14 +26,14 @@ Trie::~Trie() {
  * @param value
  */
 void Trie::insertItem(const std::string word, int value) {
-     struct TrieNode *currNode = rootNode;
-     for (auto character: word) {
-         int index = (int) (character - 'a');
-         currNode->children[index] = new struct TrieNode();
-         ++currNode->childrenCount;
-         currNode = currNode->children[index];
-     }
-     currNode->value = value;
+    struct TrieNode *currNode = rootNode;
+    for (auto character: word) {
+        int index = (int) (character - 'a');
+        currNode->children[index] = new struct TrieNode();
+        ++currNode->childrenCount;
+        currNode = currNode->children[index];
+    }
+    currNode->value = value;
 }
 
 /**
@@ -49,7 +49,7 @@ void Trie::deleteItem(const std::string word) {
  * Helper function for destructor.
  * @param node
  */
-void recursiveDeleteNode_(struct TrieNode* node) {
+void recursiveDeleteNode_(struct TrieNode *node) {
     if (node == nullptr) {
         return;
     }
@@ -62,6 +62,12 @@ void recursiveDeleteNode_(struct TrieNode* node) {
     node = nullptr;
 }
 
+/**
+ * Helper function for clearing an entry from the Trie data structure.
+ * @param node
+ * @param word
+ * @param depth
+ */
 void Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string word, int depth) {
     // This child is not a match.
     if (node == nullptr) {
@@ -73,7 +79,7 @@ void Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string word, 
 
     // This is the end of the word.
     if ((depth + 1) == word.size()) {
-        if(node->isWord) {
+        if (node->isWord) {
             node->isWord = false;
             node->value = 0;
         }
@@ -86,6 +92,11 @@ void Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string word, 
     return;
 }
 
+/**
+ * Checks if the word key exists in the Trie. Returns true if it exists else false.
+ * @param word
+ * @return
+ */
 bool Trie::hasKey(const std::string word) const {
     TrieNode *currNode = rootNode;
     for (auto character: word) {
@@ -95,4 +106,20 @@ bool Trie::hasKey(const std::string word) const {
         }
     }
     return true;
+}
+
+/**
+ * Gets the value of a word key if it exists else throws out of range exception.
+ * @param word
+ * @return
+ */
+int Trie::getValue(const std::string word) const {
+    TrieNode *currNode = rootNode;
+    for (auto character: word) {
+        int index = (int) (character - 'a');
+        if (currNode->children[index] == nullptr) {
+            throw std::out_of_range("This word key does not exist");
+        }
+    }
+    return currNode->value;
 }
