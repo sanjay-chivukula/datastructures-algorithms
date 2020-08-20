@@ -116,11 +116,13 @@ bool Trie::recursiveDeleteEntry_(struct TrieNode *node, const std::string& word,
  */
 [[nodiscard]] int Trie::getValue(const std::string& word) const {
     TrieNode *currNode = rootNode;
-    for (auto character: word) {
-        int index = (int) (character - 'a');
+    for (int i = 0; i < word.size(); ++i) {
+
+        int index = (int) (word[i] - 'a');
         if (currNode->children[index] == nullptr) {
             throw std::out_of_range("This word key does not exist");
         }
+        currNode = currNode->children[index];
     }
     return currNode->value;
 }
