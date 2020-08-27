@@ -11,15 +11,20 @@
 class Graph {
 public:
     Graph() = default;
-    ~Graph();
+
+    ~Graph() = default;
 
     void addVertex();
+
     void updateEdgeWeight(const int &row, const int &col, const int &weight);
 
     int vertexCount();
+
     int operator()(const int &row, const int &col) const;
-    int getEdgeWeight(const int &row, const int &col) const;
-    bool hasEdge(const int &row, const int &col) const;
+
+    [[nodiscard]] int getEdgeWeight(const int &row, const int &col) const;
+
+    [[nodiscard]] bool hasEdge(const int &row, const int &col) const;
 
     void printGraph();
 

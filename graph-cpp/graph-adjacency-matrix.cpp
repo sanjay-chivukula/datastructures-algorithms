@@ -9,7 +9,7 @@ void Graph::addVertex() {
     for (auto &row: graphEdges) {
         row.push_back(0);
     }
-    graphEdges.push_back(std::vector<int>(graphEdges.size() + 1, 0));
+    graphEdges.emplace_back(std::vector<int>(graphEdges.size() + 1, 0));
 }
 
 void Graph::updateEdgeWeight(const int &row, const int &col, const int &weight) {
@@ -37,6 +37,7 @@ void Graph::printGraph() {
         for (auto &edgeVal: graphRow) {
             std::cout << edgeVal << " ";
         }
-        std::cout << std::emdl;
+        std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
