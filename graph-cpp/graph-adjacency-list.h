@@ -15,15 +15,15 @@ class GraphAdjacecnyList {
 
     void addVertex();
 
-    void updateEdgeWeight(const int &row, const int &col, const int &weight);
+    void updateEdgeWeight(const int &src, const int &dst, const int &weight);
 
     int vertexCount();
 
-    int operator()(const int &row, const int &col) const;
+    int operator()(const int &src, const int &dst) const;
 
-    [[nodiscard]] int getEdgeWeight(const int &row, const int &col) const;
+    [[nodiscard]] int getEdgeWeight(const int &src, const int &dst) const;
 
-    [[nodiscard]] bool hasEdge(const int &row, const int &col) const;
+    [[nodiscard]] bool hasEdge(const int &src, const int &dst) const;
 
     void printGraph();
 
