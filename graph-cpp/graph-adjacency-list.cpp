@@ -24,3 +24,7 @@ void GraphAdjacecnyList::updateEdgeWeight(const int &src, const int &dst, const 
 }
 
 
+int GraphAdjacecnyList::vertexCount() {
+   return graph.size();
+}
+
