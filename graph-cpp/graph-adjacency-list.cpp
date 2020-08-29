@@ -9,7 +9,7 @@ void GraphAdjacecnyList::addVertex() {
 }
 
 void GraphAdjacecnyList::updateEdgeWeight(const int &src, const int &dst, const int &weight) {
-    if (src >= graph.size()){
+    if (src >= graph.size()) {
         return;
     }
 
@@ -25,6 +25,18 @@ void GraphAdjacecnyList::updateEdgeWeight(const int &src, const int &dst, const 
 
 
 int GraphAdjacecnyList::vertexCount() {
-   return graph.size();
+    return graph.size();
+}
+
+int GraphAdjacecnyList::operator()(const int &src, const int &dst) const {
+    if (src >= graph.size()) {
+        throw std::out_of_range("The edge does not exist");
+    }
+    for (auto &edgePair: graph[src]) {
+        if (edgePair.first == dst) {
+            return edgePair.second;
+        }
+    }
+    throw std::out_of_range("This edge does not exist");
 }
 
