@@ -16,6 +16,7 @@ int main() {
     testGraphObj.addVertex();
     testGraphObj.updateEdgeWeight(1, 0, 3);
     testGraphObj.updateEdgeWeight(2, 1, 5);
+    testGraphObj.updateEdgeWeight(2, 3, 7);
     testGraphObj.updateEdgeWeight(3, 2, 9);
     testGraphObj.printGraph();
 

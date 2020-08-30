@@ -65,7 +65,7 @@ void GraphAdjacecnyList::printGraph() {
     for (int srcIdx = 0; srcIdx < graph.size(); ++srcIdx) {
         std::cout << srcIdx << " -> [ ";
         for (auto &pairEdge: graph[srcIdx]) {
-            std::cout << "(" << pairEdge.first << ", " << pairEdge.second << ") ";
+            std::cout << "(" << pairEdge.first << ", " << pairEdge.second << "), ";
         }
         std::cout << "]" << std::endl;
     }
