@@ -9,6 +9,7 @@
 #include <vector>
 
 class GraphAdjacecnyList {
+public:
     GraphAdjacecnyList() = default;
 
     ~GraphAdjacecnyList() = default;
