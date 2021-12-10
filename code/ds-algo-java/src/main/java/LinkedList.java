@@ -2,7 +2,7 @@ import java.util.Iterator;
 
 public interface LinkedList<T> extends Iterator<T> {
 
-  void size();
+  int size();
 
   boolean isEmpty();
 
@@ -14,16 +14,16 @@ public interface LinkedList<T> extends Iterator<T> {
 
   boolean contains(T data);
 
-  void insertFront();
+  void insertFront(T data);
 
-  void insertBack();
+  void insertBack(T data);
 
-  void insertAtIndex(T data);
+  void insertAtIndex(T data, int index);
 
-  void removeFront();
+  T removeFront();
 
-  void removeBack();
+  T removeBack();
 
-  void removeAtIndex(T data);
+  T removeAtIndex(int index);
 
 }
