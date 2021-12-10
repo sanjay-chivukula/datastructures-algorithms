@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public interface Stack<T> extends Iterator<T> {
+public interface Stack<T> extends Iterable<T> {
 
   int size();
 
@@ -11,4 +11,7 @@ public interface Stack<T> extends Iterator<T> {
   void push(T data);
 
   T pop();
+
+  @Override
+  Iterator<T> iterator();
 }
