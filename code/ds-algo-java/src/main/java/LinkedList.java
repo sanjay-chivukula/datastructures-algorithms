@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public interface LinkedList<T> extends Iterator<T> {
+public interface LinkedList<T> extends Iterable<T> {
 
   int size();
 
@@ -26,4 +26,6 @@ public interface LinkedList<T> extends Iterator<T> {
 
   T removeAtIndex(int index);
 
+  @Override
+  Iterator<T> iterator();
 }
