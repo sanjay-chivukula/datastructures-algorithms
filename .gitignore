@@ -1,0 +1,7 @@
+# Ignores for java-ds-algo:
+java-ds-algo/.idea/
+java-ds-algo/target/
+java-ds-algo/pom.xml
+
+# Ignores for python-ds-algo:
+python-ds-algo/.idea/
