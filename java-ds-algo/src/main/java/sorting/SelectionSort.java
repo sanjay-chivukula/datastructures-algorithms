@@ -5,6 +5,9 @@ import java.util.Arrays;
 public class SelectionSort implements Sorter{
     @Override
     public int[] sort(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return arr;
+        }
         return selectionSort(arr);
     }
 
