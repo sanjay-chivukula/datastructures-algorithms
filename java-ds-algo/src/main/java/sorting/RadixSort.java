@@ -6,6 +6,9 @@ public class RadixSort implements Sorter {
 
     @Override
     public int[] sort(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return arr;
+        }
         return radixSort(arr);
     }
 
